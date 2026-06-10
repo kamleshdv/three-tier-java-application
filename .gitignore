@@ -1,0 +1,48 @@
+# Compiled class files
+*.class
+target/
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+
+# Maven wrapper (keep mvnw, mvnw.cmd, but ignore the .mvn directory)
+.mvn/
+!mvnw
+!mvnw.cmd
+
+# Log files
+*.log
+logs/
+
+# IDE files
+.idea/
+*.iml
+.project
+.classpath
+.settings/
+.vscode/
+*.swp
+*.swo
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Docker
+*.tar.gz
+*.tar
+
+# Terraform
+terraform/*.tfstate
+terraform/*.tfstate.*
+terraform/.terraform/
+terraform/terraform.tfvars
+terraform/override.tf
+terraform/override.tf.json
+terraform/*.backup
+terraform/terraform.tfplan
+
+# Application specific
+application-local.properties
+application-dev.properties
+*.pid
