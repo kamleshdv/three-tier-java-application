@@ -98,7 +98,7 @@ pipeline {
     post {
         success {
             echo "🎉 Pipeline successful! Image: ${DOCKER_IMAGE}:${env.IMAGE_TAG}"
-            #emailext (
+            emailext (
                 subject: "✅ SUCCESS: ${env.JOB_NAME} [${env.BUILD_NUMBER}]",
                 body: "Build successful!\n\nProject: ${env.JOB_NAME}\nBuild: ${env.BUILD_NUMBER}\nDocker Image: ${env.DOCKER_IMAGE}:${env.IMAGE_TAG}\nURL: ${env.BUILD_URL}",
                 to: 'kamleshjaipur2039@gmail.com'
@@ -106,7 +106,7 @@ pipeline {
         }
         failure {
             echo "❌ Pipeline failed! Check logs."
-            #emailext (
+            emailext (
                 subject: "❌ FAILED: ${env.JOB_NAME} [${env.BUILD_NUMBER}]",
                 body: "Build failed!\n\nProject: ${env.JOB_NAME}\nBuild: ${env.BUILD_NUMBER}\nCheck logs: ${env.BUILD_URL}console",
                 to: 'kamleshjaipur2039@gmail.com'
