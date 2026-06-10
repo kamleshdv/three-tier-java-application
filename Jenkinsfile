@@ -17,7 +17,6 @@ pipeline {
                 git branch: 'main',
                     url: 'https://github.com/kamleshdv/three-tier-java-application.git'
                     
-                
                 echo "✅ Code fetch ho gaya"
             }
         }
@@ -63,12 +62,10 @@ pipeline {
             steps {
                 script {
                     docker.withRegistry('', 'dockerhub-credentials') {
-                        sh '''
-                            docker push ${DOCKER_IMAGE}:${IMAGE_TAG}
-                            docker push ${DOCKER_IMAGE}:latest
-                            echo "✅ Docker Hub pe push ho gaya!"
-                        '''
+                        docker.image("${DOCKER_IMAGE}:${IMAGE_TAG}").push()
+                        docker.image("${DOCKER_IMAGE}:latest").push()
                     }
+                    echo "✅ Docker Hub pe push ho gaya!"
                 }
             }
         }
