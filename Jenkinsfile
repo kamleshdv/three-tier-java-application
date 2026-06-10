@@ -47,14 +47,30 @@ pipeline {
                 }
             }
         }
-        
-        stage('4. Trivy Se Image Scan') {
+                stage('Trivy Scan & Report Gen') {
             steps {
                 sh '''
-                    echo "🔍 Trivy scan chal raha hai..."
-                    trivy image --severity HIGH,CRITICAL --exit-code 0 ${DOCKER_IMAGE}:${IMAGE_TAG}
-                    echo "✅ Scan complete"
+                    echo "🔍 Trivy scan aur report generate ho rahi hai..."
+                    mkdir -p trivy-reports-${BUILD_NUMBER}
+                    
+                    trivy image --severity HIGH,CRITICAL --exit-code 0 ${DOCKER_IMAGE}:${IMAGE_TAG} --format json -o trivy-reports-${BUILD_NUMBER}/report.json
+                    trivy image --severity HIGH,CRITICAL --exit-code 0 ${DOCKER_IMAGE}:${IMAGE_TAG} --format template --template "@contrib/html.tpl" -o trivy-reports-${BUILD_NUMBER}/report.html
+                    
+                    echo "✅ Scan complete."
                 '''
+            }
+        }
+        
+        stage('Upload Reports to S3') {
+            steps {
+                withAWS(credentials: 'aws-s3-creds', region: 'ap-south-1') {
+                    s3Upload(
+                        file: "trivy-reports-${BUILD_NUMBER}",
+                        bucket: 'your-report-bucket-name',
+                        path: "jenkins-build-${BUILD_NUMBER}/"
+                    )
+                }
+                echo "✅ Reports S3 mein upload ho gayi."
             }
         }
         
