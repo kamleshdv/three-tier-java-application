@@ -10,7 +10,7 @@ pipeline {
         stage('1. GitHub Se Code Lana') {
             steps {
                 git branch: 'main',
-                    url: 'https://github.com/kamleshdv/three-tier-java-application.git',
+                    url: 'https://github.com/kamleshdv/three-tier-java-application.git'
                     
                 
                 echo "✅ Code fetch ho gaya"
