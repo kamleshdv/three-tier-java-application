@@ -63,7 +63,7 @@ pipeline {
         
         stage('Upload Reports to S3') {
             steps {
-                withAWS(credentials: 'aws-s3-creds', region: 'ap-south-1') {
+                withAWS(credentials: 'awscred', region: 'ap-south-1') {
                     s3Upload(
                         file: "trivy-reports-${BUILD_NUMBER}",
                         bucket: 'your-report-bucket-name',
