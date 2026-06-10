@@ -61,7 +61,7 @@ pipeline {
         stage('5. Docker Hub Pe Push') {
             steps {
                 script {
-                    docker.withRegistry('', 'dockerhub-credentials') {
+                    docker.withRegistry('', 'dockerhubpass') {
                         docker.image("${DOCKER_IMAGE}:${IMAGE_TAG}").push()
                         docker.image("${DOCKER_IMAGE}:latest").push()
                     }
