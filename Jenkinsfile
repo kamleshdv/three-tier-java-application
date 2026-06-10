@@ -1,9 +1,14 @@
 pipeline {
     agent any  // Master node pe hi run hoga
+
+    tools {
+        maven 'Maven'     // Yeh name Step 1 mein diya gaya naam
+        jdk 'JDK'       // Yeh name Step 2 mein diya gaya naam
+    }
     
     environment {
         DOCKER_IMAGE = 'kamleshdv/java-app'
-        SONAR_HOST_URL = 'http://3.110.136.104:9000'  // Agar same machine pe SonarQube hai
+        SONAR_HOST_URL = 'http://13.203.215.2:9000'  // Agar same machine pe SonarQube hai
     }
     
     stages {
