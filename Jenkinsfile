@@ -47,14 +47,21 @@ pipeline {
                 }
             }
         }
-                stage('Trivy Scan & Report Gen') {
+        
+        stage('Trivy Scan & Report Gen') {
             steps {
                 sh '''
                     echo "🔍 Trivy scan aur report generate ho rahi hai..."
                     mkdir -p trivy-reports-${BUILD_NUMBER}
                     
-                    trivy image --severity HIGH,CRITICAL --exit-code 0 ${DOCKER_IMAGE}:${IMAGE_TAG} --format json -o trivy-reports-${BUILD_NUMBER}/report.json
-                    trivy image --severity HIGH,CRITICAL --exit-code 0 ${DOCKER_IMAGE}:${IMAGE_TAG} --format template --template "@contrib/html.tpl" -o trivy-reports-${BUILD_NUMBER}/report.html
+                    # JSON report (yeh kaam karega)
+                    trivy image --severity HIGH,CRITICAL --exit-code 0 ${DOCKER_IMAGE}:${IMAGE_TAG} \
+                        --format json -o trivy-reports-${BUILD_NUMBER}/report.json
+                    
+                    # HTML report - SAHI PATH
+                    trivy image --severity HIGH,CRITICAL --exit-code 0 ${DOCKER_IMAGE}:${IMAGE_TAG} \
+                        --format template --template "@/usr/local/share/trivy/templates/html.tpl" \
+                        -o trivy-reports-${BUILD_NUMBER}/report.html
                     
                     echo "✅ Scan complete."
                 '''
