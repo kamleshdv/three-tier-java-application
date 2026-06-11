@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: java-app
+  namespace: java-ns
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: java
+  template:
+    metadata:
+      labels:
+        app: java
+    spec:
+      nodeSelector:
+        node-type: java
+      containers:
+      - name: java-app
+        image: kamleshdv/java-app:18
+        ports:
+        - containerPort: 9090
+        env:
+        - name: REDIS_HOST
+          value: "redis-service.default.svc.cluster.local"
+        - name: REDIS_PORT
+          value: "6379"
+
+           # MySQL RDS connection (Tumhara database ready hai!)
+        - name: SPRING_DATASOURCE_URL
+          value: "jdbc:mysql://insureme-mysql.cjkqcys2wev6.ap-south-1.rds.amazonaws.com:3306/insureme_db?useSSL=false&allowPublicKeyRetrieval=true"
+        - name: SPRING_DATASOURCE_USERNAME
+          value: "ram"
+        - name: SPRING_DATASOURCE_PASSWORD
+          value: "ram123456"
+        - name: SPRING_JPA_HIBERNATE_DDL_AUTO
+          value: "update"
+        - name: SPRING_JPA_DATABASE_PLATFORM
+          value: "org.hibernate.dialect.MySQL8Dialect"

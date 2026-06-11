@@ -110,5 +110,5 @@ variable "db_password" {
   description = "Database master password"
   type        = string
   sensitive   = true
-  default     = "ram@1234"  # You MUST set this in terraform.tfvars
+  default     = "ram123456"  # You MUST set this in terraform.tfvars
 }
