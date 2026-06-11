@@ -14,10 +14,12 @@
 	<name>Insure-me</name>
 	<description>Industry ready project on based on Insurance Domain</description>
 	<properties>
-    <maven.compiler.source>1.8</maven.compiler.source>
-    <maven.compiler.target>1.8</maven.compiler.target>
-  </properties>
+		<maven.compiler.source>1.8</maven.compiler.source>
+		<maven.compiler.target>1.8</maven.compiler.target>
+	</properties>
+	
 	<dependencies>
+		<!-- Spring Boot Starters -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-jpa</artifactId>
@@ -27,28 +29,32 @@
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
 		
-		 <dependency>
-	      <groupId>com.h2database</groupId>
-	      <artifactId>h2</artifactId>
-	      <scope>runtime</scope>
-	    </dependency>
-
+		<!-- H2 Database (Development/Test) -->
+		<dependency>
+			<groupId>com.h2database</groupId>
+			<artifactId>h2</artifactId>
+			<scope>runtime</scope>
+		</dependency>
+		
+		<!-- ✅ MySQL Connector - YEH ADD KARO ✅ -->
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>8.0.33</version>
+		</dependency>
+		
+		<!-- Testing -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
-		
-		<!-- https://mvnrepository.com/artifact/org.testng/testng -->
-		<!-- https://mvnrepository.com/artifact/org.testng/testng -->
-                 <dependency>
-   			 <groupId>org.testng</groupId>
-  			 <artifactId>testng</artifactId>
-  			 <version>6.9.9</version>
-    			 <scope>test</scope>
+		<dependency>
+			<groupId>org.testng</groupId>
+			<artifactId>testng</artifactId>
+			<version>6.9.9</version>
+			<scope>test</scope>
 		</dependency>
-
-		
 	</dependencies>
 
 	<build>
@@ -59,5 +65,4 @@
 			</plugin>
 		</plugins>
 	</build>
-
 </project>
