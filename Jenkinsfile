@@ -8,7 +8,7 @@ pipeline {
     
     environment {
         DOCKER_IMAGE = 'kamleshdv/java-app'
-        SONAR_HOST_URL = 'http://13.203.215.2:9000'  // Agar same machine pe SonarQube hai
+        SONAR_HOST_URL = 'http://3.7.46.130:9000'  // Agar same machine pe SonarQube hai
     }
     
     stages {
